@@ -4,8 +4,7 @@ const favicon = require('serve-favicon')
 const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
-const Todo = require('./models/schema/todoSchema')
-
+const todo = require('./controlers/todo.js')
 var app = express()
 
 
@@ -15,10 +14,12 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-
-
 mongoose.connect('mongodb://localhost:5000');
-
+app.get('/todos',todo.getAllTodos)
+app.get('/todo/:id',todo.getTodoById)
+app.post('/todo',todo.createTodo)
+app.put('/todo/:id',todo.updateTodoById)
+app.delete('/todo/:id',todo.delteTodoById)
 
 app.get('/',(req,res,next) => {
   Todo.find({},(err,todos) => {

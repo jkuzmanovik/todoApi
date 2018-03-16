@@ -1,0 +1,10 @@
+CREATING USER
+
+DEPENDECIES NEEDED:
+    body-parser,
+    express,
+    nodemon,
+    mongoose,
+    bcrypt,
+    express-session,
+    connect-mongo

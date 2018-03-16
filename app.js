@@ -4,8 +4,10 @@ const favicon = require('serve-favicon')
 const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
-const todo = require('./controlers/todo.js')
-var app = express()
+const session  = require('express-session')
+const app = express()
+const todo = require('./routes/todo/todoRoutes')
+const user= require('./controlers/user.js')
 
 
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -14,26 +16,22 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
+
 mongoose.connect('mongodb://localhost:5000');
 //GET MIDDLEWARE
+app.use(todo)
 
-app.get('/todos',todo.getAllTodos)
-app.get('/todo/:id',todo.getTodoById)
-app.get('/todos/finished',todo.getFinishedTodos)
-app.get('/todos/unfinished',todo.getUnFinishedTodos)
-
+app.get('/users',user.getAllUsers)
 
 //POST MIDDLEWARE
-app.post('/todo',todo.createTodo)
+
+app.post('/user',user.createUser)
 
 //PUT MIDDLEWARE
-app.put('/todo/:id',todo.updateTodoById)
-app.put('/todo/finished/:id',todo.updateIsFinished)
 
 //DELETE MIDDLEWARE
 
-app.delete('/todo/:id',todo.delteTodoById)
-app.delete('/todos/deleteall',todo.deleteAllTodos)
+app.delete('/users/deleteall',user.deleteAllUsers)
 
 
 // catch 404 and forward to error handler

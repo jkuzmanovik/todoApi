@@ -1,77 +1,30 @@
+
 /*
-THIS FILE GETS IMPORTED IN APP.JS
-AND SERVER AS CONTROLERS FOR TODO
+THIS FILE GETS ALL OF THE FUNCTION FOR TODO FROM THE FOLDER ./TODO AND EXPORTS THEM TO routerTodo 
+AND SERVE AS CONTROLERS FOR TODO
 */
 
-const Todo = require('../models/schema/todoSchema.js')
-const mongoose = require('mongoose')
 
-module.exports.getAllTodos = (req,res,next) => {
-    Todo.find({},(err,todos) => {
-        if(err) return next(err)
-        res.json(todos)
-    })
-}
+//importhing all functions from ./todo folder
+const createTodo = require('./todo/createTodo')
+const getTodos = require('./todo/getTodos')
+const getTodoById = require('./todo/getTodoById')
+const deleteTodoById = require('./todo/deleteTodoById')
+const updateTodoById = require('./todo/updateTodoById')
+const finishTodo = require('./todo/finishTodo')
+const getFinishedTodos = require('./todo/getFinishedTodos')
+const getUnFinishedTodos = require('./todo/getUnFinishedTodos')
+const deleteTodos = require('./todo/deleteTodos')
 
-module.exports.getTodoById = (req,res,next) => {
-    Todo.findById(req.params.id,(err,todo) => {
-        if(err) return next(err)
-        if(!todo) return res.send('no coupon with that id')
-        return res.json(todo)
-    })
-}
+//exporthing all functions to todoRouter
 
-module.exports.createTodo = (req,res,next) => {
-    const newTodo = new Todo(req.body)
-    newTodo.save((err,coupon) => {
-        if(err) return next(err)
-        res.sendStatus(200)
-    })
-}
-
-module.exports.delteTodoById = (req,res,next) => {
-    Todo.findByIdAndRemove(req.params.id,(err,todo) => {
-        if(err) return next (err)
-        if(!todo) return res.status(400).send('No todo with that id')
-        res.sendStatus(200)
-    })
-}
-
-module.exports.updateTodoById = (req,res,next) => {
-    Todo.findOneAndUpdate({_id:req.params.id},req.body,(err,todo) => {
-        if(err) return next(err)
-        if(!todo) return res.status(400).send('no todo with that id')
-        return res.sendStatus(200)
-    })
-}
-
-module.exports.updateIsFinished = (req,res,next) => {
-    Todo.findById(req.params.id,(err,todo) => {
-        todo.isFinished = !todo.isFinished
-        todo.save((err,todo) => {
-            if(err) return next(err)
-            return res.json(todo)
-        })
-    })
-}
-
-module.exports.getFinishedTodos = (req,res,next) => {
-    Todo.find({isFinished:true},(err,todos) => {
-        if(err) return next(err)
-        return res.json(todos)
-    })
-}
-module.exports.getUnFinishedTodos = (req,res,next) => {
-    Todo.find({isFinished:false},(err,todos) => {
-        if(err) return next(err)
-        return res.json(todos)
-    })
-}
-
-module.exports.deleteAllTodos = (req,res,next) => {
-    Todo.remove({},(err)=> {
-        if(err) return next(err)
-        return res.sendStatus(200)
-    })
-}
+module.exports.createTodo = createTodo
+module.exports.getTodos = getTodos 
+module.exports.getTodoById = getTodoById
+module.exports.deleteTodoById = deleteTodoById
+module.exports.updateTodoById = updateTodoById
+module.exports.finishTodo = finishTodo
+module.exports.getFinishedTodos = getFinishedTodos
+module.exports.getUnFinishedTodos = getUnFinishedTodos
+module.exports.deleteTodos = deleteTodos
 

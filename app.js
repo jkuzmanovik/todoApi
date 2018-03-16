@@ -6,9 +6,9 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const session  = require('express-session')
 const app = express()
-const todo = require('./routes/todo/todoRoutes')
-const user= require('./controlers/user.js')
 
+const todo = require('./routes/todoRoutes')
+const user = require('./routes/userRoutes')
 
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'))
@@ -18,20 +18,10 @@ app.use(cookieParser())
 
 
 mongoose.connect('mongodb://localhost:5000');
-//GET MIDDLEWARE
+
 app.use(todo)
+app.use(user)
 
-app.get('/users',user.getAllUsers)
-
-//POST MIDDLEWARE
-
-app.post('/user',user.createUser)
-
-//PUT MIDDLEWARE
-
-//DELETE MIDDLEWARE
-
-app.delete('/users/deleteall',user.deleteAllUsers)
 
 
 // catch 404 and forward to error handler

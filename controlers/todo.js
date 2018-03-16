@@ -16,8 +16,7 @@ const getFinishedTodos = require('./todo/getFinishedTodos')
 const getUnFinishedTodos = require('./todo/getUnFinishedTodos')
 const deleteTodos = require('./todo/deleteTodos')
 
-//exporthing all functions to todoRouter
-
+//exporthing all functions 
 module.exports.createTodo = createTodo
 module.exports.getTodos = getTodos 
 module.exports.getTodoById = getTodoById

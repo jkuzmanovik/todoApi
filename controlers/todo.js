@@ -1,6 +1,10 @@
+/*
+THIS FILE GETS IMPORTED IN APP.JS
+AND SERVER AS CONTROLERS FOR TODO
+*/
+
 const Todo = require('../models/schema/todoSchema.js')
 const mongoose = require('mongoose')
-const express= 
 
 module.exports.getAllTodos = (req,res,next) => {
     Todo.find({},(err,todos) => {
@@ -8,7 +12,6 @@ module.exports.getAllTodos = (req,res,next) => {
         res.json(todos)
     })
 }
-
 
 module.exports.getTodoById = (req,res,next) => {
     Todo.findById(req.params.id,(err,todo) => {
@@ -40,7 +43,35 @@ module.exports.updateTodoById = (req,res,next) => {
         if(!todo) return res.status(400).send('no todo with that id')
         return res.sendStatus(200)
     })
+}
 
+module.exports.updateIsFinished = (req,res,next) => {
+    Todo.findById(req.params.id,(err,todo) => {
+        todo.isFinished = !todo.isFinished
+        todo.save((err,todo) => {
+            if(err) return next(err)
+            return res.json(todo)
+        })
+    })
+}
 
+module.exports.getFinishedTodos = (req,res,next) => {
+    Todo.find({isFinished:true},(err,todos) => {
+        if(err) return next(err)
+        return res.json(todos)
+    })
+}
+module.exports.getUnFinishedTodos = (req,res,next) => {
+    Todo.find({isFinished:false},(err,todos) => {
+        if(err) return next(err)
+        return res.json(todos)
+    })
+}
+
+module.exports.deleteAllTodos = (req,res,next) => {
+    Todo.remove({},(err)=> {
+        if(err) return next(err)
+        return res.sendStatus(200)
+    })
 }
 

@@ -15,19 +15,25 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
 mongoose.connect('mongodb://localhost:5000');
+//GET MIDDLEWARE
+
 app.get('/todos',todo.getAllTodos)
 app.get('/todo/:id',todo.getTodoById)
+app.get('/todos/finished',todo.getFinishedTodos)
+app.get('/todos/unfinished',todo.getUnFinishedTodos)
+
+
+//POST MIDDLEWARE
 app.post('/todo',todo.createTodo)
+
+//PUT MIDDLEWARE
 app.put('/todo/:id',todo.updateTodoById)
+app.put('/todo/finished/:id',todo.updateIsFinished)
+
+//DELETE MIDDLEWARE
+
 app.delete('/todo/:id',todo.delteTodoById)
-
-app.get('/',(req,res,next) => {
-  Todo.find({},(err,todos) => {
-    if(err) return err
-    res.send(todos)
-  })
-})
-
+app.delete('/todos/deleteall',todo.deleteAllTodos)
 
 
 // catch 404 and forward to error handler

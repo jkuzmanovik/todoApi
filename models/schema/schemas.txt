@@ -1,9 +1,0 @@
-TODO SCHEMA:
-    title:string,required,trim
-    constext:String,trim,
-    isFinished: bool,Required,Default false,
-    createdAt: date,
-    finishedAt:date,
-     
-    
-    

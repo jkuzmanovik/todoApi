@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const bcrypt = require('bcryptjs')
 
 const userSchema = new Schema({
     firstName:{type:String,trim:true},
@@ -20,6 +21,9 @@ userSchema.pre('save',function(callback) {
     callback()
 })
 
+userSchema.methods.comparePassword = function(pw) {
+    return bcrypt.compareSync(pw,this.hash)
+}
 
 //create FullName for each user
 userSchema.virtual('name').get(function() {
@@ -30,6 +34,7 @@ userSchema.virtual('name').get(function() {
     } else if (this.lastName) name = this.lastName;
     return name;
 });
+
 
 const User = mongoose.model('User',userSchema)
 module.exports = User

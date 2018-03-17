@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const session  = require('express-session')
 const app = express()
-
 const todo = require('./routes/todoRoutes')
 const user = require('./routes/userRoutes')
 const login = require('./routes/login')
@@ -19,6 +18,7 @@ app.use(cookieParser())
 
 
 mongoose.connect('mongodb://localhost:5000');
+
 
 
 app.use(login)

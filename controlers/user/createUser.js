@@ -22,17 +22,22 @@ module.exports = (req,res,next) => {
             userData.email = req.body.email
 
     //validate PhoneNumber
-    if(req.body.phoneNumber && typeof req.body.phoneNumber !=='string')
+    if(typeof req.body.phoneNumber !=='string')
         return res.status(400).send('invalid phoneNumber')
-    if(!req.body.phoneNumber)
-        return res.status(400).send('Missing phoneNumber')
     if(req.body.phoneNumber)
-        userData.phoneNumber = req.body.phoneNumber
+        if(!(/^\d{3}-\d{3}-\d{4}$/gm).test(req.body.phoneNumber))
+            return res.status(400).send('Phone number must be 10 digit')
+        else
+            userData.phoneNumber = req.body.phoneNumber
 
+    
     //validate password and hash it
     if(!req.body.password)
         return res.status(400).send('Missing password')
-    if(req.body.password && typeof req.body.password === 'string')
+
+    if(req.body.password && typeof req.body.password !== 'string')
+        return res.status(400).send('Invalid passowrd')
+    else
         userData.hash = bcrypt.hashSync(req.body.password, salt);
 
     //check if firstName is provied and add it to the userData

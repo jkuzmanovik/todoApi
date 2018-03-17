@@ -4,7 +4,6 @@ const app = express()
 
 app.route('/user')
     .get(user.getAllUsers)
-    .post(user.createUser)
     .delete(user.deleteAllUsers)
 app.route('/user/:id')
     .get(user.findUserById)

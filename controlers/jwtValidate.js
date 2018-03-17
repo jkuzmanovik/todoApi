@@ -13,7 +13,6 @@ module.exports.getToken= (req, res, next) => {
       const bearerToken = bearer[1];
       // Set the token
       req.token = bearerToken;
-      // Next middleware
       next();
     } else {
       // Forbidden
@@ -22,10 +21,11 @@ module.exports.getToken= (req, res, next) => {
   }
 
 module.exports.validateToken = (req,res,next) => {
-   try{ jwt.verify(req.token,config.secret,(err,decoded) => {
+   try{ 
+     jwt.verify(req.token,config.secret,(err,decoded) => {
         if(err) throw(err) 
         next()
-    })
+        })
     }catch(err) {
         return res.send("Invalid token").status(401)
     }

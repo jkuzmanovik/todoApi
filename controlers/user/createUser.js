@@ -40,12 +40,12 @@ module.exports = (req,res,next) => {
         return res.status(400).send('invalid firstName')
     if(req.body.firstName)
         userData.firstName = req.body.firstName
+
     //check if lastName is provided and add it to the userData
     if(req.body.lastName && typeof req.body.lastName!== 'string')
         return res.status(400).send('invalid lastName')
     if(req.body.lastName)
         userData.lastName = req.body.lastName
-        console.log('doagjam do tuka')
 
    var newUser = new User(userData)
 

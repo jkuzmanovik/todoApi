@@ -9,6 +9,9 @@ const app = express()
 
 const todo = require('./routes/todoRoutes')
 const user = require('./routes/userRoutes')
+const User = require('./models/schema/userSchema')
+const verifyToken = require('./controlers/jwtCheck')
+const auth = require('./controlers/auth')
 
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'))
@@ -18,6 +21,12 @@ app.use(cookieParser())
 
 
 mongoose.connect('mongodb://localhost:5000');
+
+
+app.post('/login',auth.loginUser)
+app.use(verifyToken.getToken)
+app.use(verifyToken.validateToken)
+
 
 app.use(todo)
 app.use(user)

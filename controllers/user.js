@@ -1,3 +1,11 @@
+/**
+ * This file gets importd in the user routes
+ * Also there is no need for try catch in any of the promises
+ * because we use express-router-promise
+ * that does the work automaticly
+ */
+
+
 const User = require('../models/schema/user')
 const Todo = require('../models/schema/todo')
 module.exports = {
@@ -11,7 +19,7 @@ module.exports = {
         return res.status(201).json(user)
     },
     getUserById: async (req,res,next) => {
-        const {userId} = req.params
+        const {userId} = req.value.params
         const user = await User.findById(userId) 
         return res.status(200).json(user)
     },

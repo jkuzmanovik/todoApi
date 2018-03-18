@@ -1,6 +1,7 @@
 const express = require('express')
 const router = require('express-promise-router')()
 const user = require('../controllers/user')
+const {validateParam, schemas} = require('../helpehrs/routeHelpers')
 
 router.route('/')
     .get(user.getAllUsers)
@@ -8,7 +9,7 @@ router.route('/')
 
 
 router.route('/:userId')
-    .get(user.getUserById)
+    .get(validateParam(schemas.idSchema,'userId'),user.getUserById)
     .put(user.replaceUser)
     // .patch(user.updateUser)
 

@@ -3,7 +3,7 @@ const router = require('express-promise-router')()
 const user = require('../controllers/user')
 const todo = require('../controllers/todo')
 
-const {validateParam,validateBody, schemas} = require('../helpehrs/routeHelpers')
+const {validateParam,validateBody, schemas} = require('../helpers/routeHelpers')
 
 router.route('/')
     .get(user.getAllUsers)

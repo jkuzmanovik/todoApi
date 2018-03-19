@@ -10,6 +10,4 @@ router.route('/login')
 
 router.route('/signup')
     .post(validateBody(schemas.signupSchema),auth.signup)
-
-
 module.exports = router

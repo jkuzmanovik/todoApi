@@ -5,6 +5,7 @@ SIGN UP USERS AND LOGIN USERS
 const jwt =  require('jsonwebtoken')
 const User = require('../models/schema/user')
 const {jwtSecret} = require('../configuration/configuration')
+const {ExtractJwt}  =require('passport-jwt')
 
 //function for creating token
 signToken = user => {
@@ -39,5 +40,13 @@ module.exports = {
          await newUser.save()
         const token = signToken(newUser) 
         return res.status(200).json({token})
+    },
+    checkIfRealUser: async (req,res,next) => {
+        const {userId} = req.params
+        const jwtFromRequest = req.get('authorization')
+        const decodedJWT = jwt.decode(jwtFromRequest)
+        if(userId !== decodedJWT.sub)
+            return res.status(400).send('unauthorized')
+        next()
     }
 }

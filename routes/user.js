@@ -6,10 +6,13 @@ const auth = require('../controllers/auth')
 const passport = require('passport')
 const passportConf = require('../controllers/passport')
 const {validateParam,validateBody, schemas} = require('../helpers/routeHelpers')
+const authenticate = passport.authenticate('jwt',{session:false})
 
+router.use(authenticate)
 router.route('/')
     .get(user.getAllUsers)
 
+router.use('/:userId',validateParam(schemas.idSchema,'userId'),auth.checkIfRealUser)
 
 router.route('/:userId')
     .get(validateParam(schemas.idSchema,'userId'),user.getUserById)
@@ -22,6 +25,8 @@ router.route('/:userId/todos')
 
 router.route('/secret/asdf')
    .get (passport.authenticate('jwt', {session:false}),(req,res,next) => {return res.send('you are authorized')})
+
+
 
     
 module.exports = router

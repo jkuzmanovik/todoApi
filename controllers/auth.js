@@ -21,11 +21,10 @@ module.exports = {
     login: async (req,res,next) => {
         const {email} = req.value.body
         //check if user already exists
-        const user = User.findOne({email})
+        const user = await User.findOne({email})
         if(!user) return res.status(400).send('No user with that email')
-
-        const token =  signToken(req.user)
-
+        const token =  await signToken(user)
+        //return new token
         return res.status(200).json({token})
 
     },

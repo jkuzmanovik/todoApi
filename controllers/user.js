@@ -4,6 +4,7 @@
  * because we use express-router-promise
  * that does the work automaticly
  */
+
 const User = require('../models/schema/user')
 module.exports = {
     getAllUsers: async (req,res,next) => {
@@ -22,7 +23,6 @@ module.exports = {
     replaceUser: async (req,res,next) => {
         const {userId} = req.value.params
         const userBody = req.value.body
-        console.log(userBody)
         const user = await User.findOneAndUpdate(userId,userBody,{new:true})
         if(!user) return res.status(400).send('No user with that specific id')
         return res.json({success:true})

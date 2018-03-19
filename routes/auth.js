@@ -6,7 +6,7 @@ const {validateBody, schemas} = require('../helpers/routeHelpers')
 
 const passwordLogin = passport.authenticate('local',{session:false})
 router.route('/login')
-    .post(validateBody(schemas.logInSchema),passwordLogin,auth.login)
+    .post(validateBody(schemas.logInSchema),passport.authenticate('local',{session:false}),auth.login)
 
 router.route('/signup')
     .post(validateBody(schemas.signupSchema),auth.signup)

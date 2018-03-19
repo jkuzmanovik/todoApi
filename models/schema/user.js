@@ -11,7 +11,14 @@ const userSchema = new Schema({
         type:Schema.Types.ObjectId, ref:'todo'
     }],
     password:{type:String, required:true}
+    },{
+        toObject: { getters: true },
+        timestamps: {
+            createdAt: 'createdDate',
+            updatedAt: 'updatedDate'
+        }
 })
+
 
 userSchema.pre('save',async function (next) {
     try{

@@ -7,45 +7,40 @@
 
 
 const User = require('../models/schema/user')
-const Todo = require('../models/schema/todo')
 module.exports = {
     getAllUsers: async (req,res,next) => {
         const users = await User.find({})
         return res.json(users)
     },
+
     createUser: async (req,res,next) => {
-        const newUser = new User(req.body)
+        const newUser = new User(req.value.body)
         const user =  await newUser.save()
         return res.status(201).json(user)
     },
+
     getUserById: async (req,res,next) => {
         const {userId} = req.value.params
         const user = await User.findById(userId) 
+        if(!user) return res.status(400).send('No user with that specific id')
         return res.status(200).json(user)
     },
+
+    //Not working because mongoose schmea defined everything to be unique
+    //TODO: fix it 
     replaceUser: async (req,res,next) => {
-        const {userId} = req.params
-        const userBody = req.body
-        const newUser = await User.findByIdAndUpdate(userId,userBody,{new:true})
-        return res.json(newUser)
+        const {userId} = req.value.params
+        const userBody = req.value.body
+        console.log(userBody)
+        const user = await User.findOneAndUpdate(userId,userBody,{new:true})
+        if(!user) return res.status(400).send('No user with that specific id')
+        return res.json({success:true})
     },
-    getUserTodos: async (req,res,next) => {
-        const {userId} = req.params
-        const user = await User.findById(userId).populate('todos')
-        return res.json(user.todos)
-            
-
-    },
-    createUserTodo: async (req,res,next) => {
-        const {userId} = req.params
-        const newTodo = new Todo(req.body)
-        const user = await User.findById(userId)
-        newTodo.user = user
-        await newTodo.save()
-        user.todos.push(newTodo)
-        await user.save()
-        return res.json(newTodo)
-    }
-
-    
+    updateUser: async (req,res,next) => {
+        const {userId} = req.value.params
+        const newUser = req.value.body
+        const user = await User.findOneAndUpdate(userId,newUser,{new:true})
+        if(!user) return res.status(400).send('No user with that specific id')
+        return res.json(user)
+       },
 }

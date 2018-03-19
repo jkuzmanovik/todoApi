@@ -7,6 +7,7 @@ const app = express()
 const User = require('./routes/user')
 
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+//MIDDLEWARE
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -15,8 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 mongoose.Promise = global.Promise
 mongoose.connect('mongodb://localhost:5000')
 
-
-//MIDDLEWARE
+//ROUTES
 app.use('/user',User)
 
 // catch 404 and forward to error handler

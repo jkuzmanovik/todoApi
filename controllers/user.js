@@ -12,13 +12,6 @@ module.exports = {
         const users = await User.find({})
         return res.json(users)
     },
-
-    createUser: async (req,res,next) => {
-        const newUser = new User(req.value.body)
-        const user =  await newUser.save()
-        return res.status(201).json(user)
-    },
-
     getUserById: async (req,res,next) => {
         const {userId} = req.value.params
         const user = await User.findById(userId) 

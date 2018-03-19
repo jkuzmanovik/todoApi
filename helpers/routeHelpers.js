@@ -32,7 +32,7 @@ module.exports = {
         }
     },
     schemas: {
-        userSchema: Joi.object().keys({
+        signupSchema: Joi.object().keys({
             userName: Joi.string().required(),
             firstName: Joi.string(),
             lastName: Joi.string(),
@@ -47,6 +47,10 @@ module.exports = {
             lastName: Joi.string(),
             email: Joi.string().email(),
             hash:Joi.string()
+        }),
+        logInSchema: Joi.object().keys({
+            email: Joi.string().required().email(),
+            password: Joi.string().required()
         }),
 
         todoSchema: Joi.object().keys({

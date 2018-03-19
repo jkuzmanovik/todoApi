@@ -19,7 +19,7 @@ module.exports = {
         }},
         validateBody: (schema) => {
             return (req,res,next) => {
-                result = Joi.validate(req.body,schema)
+                const result = Joi.validate(req.body,schema)
                 if(result.error)
                     return res.status(400).json(result.error)
                 if(!req.value)
@@ -32,24 +32,22 @@ module.exports = {
         }
     },
     schemas: {
-        signupSchema: Joi.object().keys({
+        signupSchema:  Joi.object().keys({
             userName: Joi.string().required(),
             firstName: Joi.string(),
             lastName: Joi.string(),
             email: Joi.string().email().required(),
-            hash:Joi.string().required()
-
+            password:Joi.string().required()
         }),
-
         userOptionalSchema:  Joi.object().keys({
             userName: Joi.string(),
             firstName: Joi.string(),
             lastName: Joi.string(),
             email: Joi.string().email(),
-            hash:Joi.string()
+            password:Joi.string()
         }),
         logInSchema: Joi.object().keys({
-            email: Joi.string().required().email(),
+            email: Joi.string().email().required(),
             password: Joi.string().required()
         }),
 

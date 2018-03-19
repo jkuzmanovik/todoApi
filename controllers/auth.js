@@ -1,3 +1,7 @@
+/*
+AUTHENTICATION CONTROLLERS FOR
+SIGN UP USERS AND LOGIN USERS
+*/
 const jwt =  require('jsonwebtoken')
 const User = require('../models/schema/user')
 const {jwtSecret} = require('../configuration/configuration')
@@ -15,10 +19,14 @@ signToken = user => {
 module.exports = {
     login: async (req,res,next) => {
         const {email} = req.value.body
+        //check if user already exists
         const user = User.findOne({email})
         if(!user) return res.status(400).send('No user with that email')
-        //TODO RESPONSE WITH TOKEN
-        return res.send('logged in')
+
+        const token =  signToken(req.user)
+
+        return res.status(200).json({token})
+
     },
 
     signup: async (req,res,next) => {
@@ -30,6 +38,6 @@ module.exports = {
         const newUser = new User(req.value.body)
          await newUser.save()
         const token = signToken(newUser) 
-        return res.status(200).json(token)
+        return res.status(200).json({token})
     }
 }

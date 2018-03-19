@@ -5,7 +5,7 @@ const logger = require('morgan')
 const bodyParser = require('body-parser')
 const app = express()
 const User = require('./routes/user')
-
+const Auth = require('./routes/auth')
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 //MIDDLEWARE
 app.use(logger('dev'))
@@ -17,6 +17,7 @@ mongoose.Promise = global.Promise
 mongoose.connect('mongodb://localhost:5000')
 
 //ROUTES
+app.use(Auth)
 app.use('/user',User)
 
 // catch 404 and forward to error handler

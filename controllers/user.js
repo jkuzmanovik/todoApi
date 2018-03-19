@@ -4,8 +4,6 @@
  * because we use express-router-promise
  * that does the work automaticly
  */
-
-
 const User = require('../models/schema/user')
 module.exports = {
     getAllUsers: async (req,res,next) => {

@@ -25,7 +25,7 @@ module.exports = {
         if(!user) return res.status(400).send('No user with that email')
         const token =  await signToken(user)
         //return new token
-        return res.status(200).json({token:token,userId:user.Id})
+        return res.status(200).json({token:token,userId:user.id})
 
     },
 

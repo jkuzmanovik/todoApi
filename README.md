@@ -2,6 +2,11 @@
 ## About this project
 This is simple todo project that i created for fun 
 
+###HOST
+  this api is hosted on heroku feel free to use it :)
+
+  URL: https://jordantodoapi.herokuapp.com/
+
 ## USAGE 
 ### userSchema ###
 

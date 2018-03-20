@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const favicon = require('serve-favicon')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
+const PORT = process.env.PORT || 5000
 const app = express()
 const User = require('./routes/user')
 const Auth = require('./routes/auth')

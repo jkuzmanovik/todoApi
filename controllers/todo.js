@@ -18,5 +18,37 @@ module.exports = {
         user.todos.push(newTodo._id)
         await user.save()
         return res.json(newTodo)
+    },
+    getTodo: async (req,res,next) => {
+        const {todoId} = req.value.params
+        const todo = await Todo.findById(todoId)
+        if(!todo) return res.status(400).send('incorrect id')
+        return res.status(200).json({todo})
+    },
+    replaceTodo: async (req,res,next) => {
+        const {todoId} = req.value.params
+        const todoBody = req.value.body
+        const todo = await Todo.findOneAndUpdate(todoId,todoBody,{new:true})
+        if(!todo) return res.status(400).send('No todo with that specific id')
+        return res.json(todo)
+    },
+    updateTodo: async (req,res,next) => {
+        const {todoId} = req.value.params
+        const todoBody = req.value.body
+        const todo = await Todo.findOneAndUpdate(todoId,todoBody,{new:true})
+        if(!todo) return res.status(400).send('No todo with that specific id')
+        return res.json(todo)
+    },
+    deleteTodo: async (req,res,next) => {
+        const {todoId} = req.value.params
+        await Todo.findOneAndRemove(todoId)
+        return res.sendStatus(200)
+    },
+    updateFinished: async (req,res,next) => {
+        const {todoId} = req.value.params
+        const todo = await Todo.findById(todoId)
+        todo.isFinished = !todo.isFinished
+        await todo.save()
+        return res.sendStatus(200)
     }
 }

@@ -53,7 +53,13 @@ module.exports = {
 
         todoSchema: Joi.object().keys({
             title: Joi.string().required(),
-            context:Joi.string()
+            context:Joi.string(),
+            isFinished:Joi.boolean()
+        }),
+        todoOptionalSchema: Joi.object().keys({
+            title: Joi.string(),
+            context:Joi.string(),
+            isFinished:Joi.boolean()
         }),
        
         idSchema: Joi.object().keys({

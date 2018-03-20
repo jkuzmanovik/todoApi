@@ -10,7 +10,7 @@ This is simple todo project that i created for fun
     firstName:{type:String, trim:true},
     lastName:{type:String, trim:true},
     email:{type:String, required:true, unique:true,trim:true},
-    todos`
+    todos:[{
         type:Schema.Types.ObjectId, ref:'todo'
     }],
     password:{type:String, required:true}
@@ -22,29 +22,29 @@ If you want to see the full schema go to ```modes/schemas/user.js```
 
 #### /signup
 ```javascript 
-  .post()  Create new user (you need to provide JSON body with atleast userName,email and password that are required) --> return new token
+  .post()  //Create new user (you need to provide JSON body with atleast userName,email and password that are required) --> return new token
 ```
 
 #### /login
 ```javascript
-  .post() Log in functionality(you need to provide correct email and corect password) --> return new token
+  .post() //Log in functionality(you need to provide correct email and corect password) --> return new token
 ```
  #### /user/:userId
  ```javascript
-    .get() get user with that id(you need to have the token that you logged in for this user) --> return single 
-    .put() update  user with id(you need to provide all of the required fields in order to update with put) --> return updated user
-    .patch() update user with id(you can provide only the field that you want to change) --> return updated user
-    .delete() delet user with id --> return status(200) if deleteion is success
+    .get() //get user with that id(you need to have the token that you logged in for this user) --> return single 
+    .put() //update  user with id(you need to provide all of the required fields in order to update with put) --> return updated user
+    .patch() //update user with id(you can provide only the field that you want to change) --> return updated user
+    .delete() //delete user with id --> return status(200) if deleteion is success
  ```
  #### /user/userId /todos
 ```javascript
-    .get()  get todos that are associated with the userId --> return todo
-    .post() create todo(title is required) --> return the created todo
+    .get()  //get todos that are associated with the userId --> return todo
+    .post() //create todo(title is required) --> return the created todo
 ```
 #### /user/userId/todos/todoId
 ```javascript
-  .get() get  single todo associated with the userId and todoID --> return single todo
-  .put() update single todo with the todoId (title is required) --> return updated todo
+  .get() //get  single todo associated with the userId and todoID --> return single todo
+  .put() //update single todo with the todoId (title is required) --> return updated todo
   .patch() //update single todo with the todoId (provide only the field that you need to update) --> return updated todo
   .delete() //delete single todo with the todoId --> return status(200) if success```
 ```

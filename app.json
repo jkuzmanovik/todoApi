@@ -1,0 +1,6 @@
+{
+  "name": "TODO Api",
+  "description": "Simple todo api that will serve json to reguests",
+  "repository": "https://github.com/jkuzmanovik/todoApi.git",
+  "keywords": ["node", "express", "todo"]
+}

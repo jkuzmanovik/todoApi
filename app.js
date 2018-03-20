@@ -17,6 +17,7 @@ mongoose.Promise = global.Promise
 mongoose.connect('mongodb://localhost:5000')
 
 //ROUTES
+app.get('/', (req,res,nex) =>  {return res.send('working')})
 app.use(Auth)
 app.use('/user',User)
 

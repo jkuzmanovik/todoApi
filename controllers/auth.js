@@ -25,7 +25,7 @@ module.exports = {
         if(!user) return res.status(400).send('No user with that email')
         const token =  await signToken(user)
         //return new token
-        return res.status(200).json({token})
+        return res.status(200).json({token:token,userId:userId})
 
     },
 
@@ -38,7 +38,7 @@ module.exports = {
         const newUser = new User(req.value.body)
          await newUser.save()
         const token = signToken(newUser) 
-        return res.status(200).json({token})
+        return res.status(200).json({token:token,userId:newUser.id})
     },
     checkIfRealUser: async (req,res,next) => {
         const {userId} = req.params

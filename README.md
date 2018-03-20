@@ -1,6 +1,6 @@
 # todoApi
 ## About this project
-This is simple todo project that i created for fun 
+  This is simple todo project that i created for fun 
 
 ###HOST
   this api is hosted on heroku feel free to use it :)
@@ -27,12 +27,12 @@ If you want to see the full schema go to ```modes/schemas/user.js```
 
 #### /signup
 ```javascript 
-  .post()  //Create new user (you need to provide JSON body with atleast userName,email and password that are required) --> return new token
+  .post()  //Create new user (you need to provide JSON body with atleast userName,email and password that are required) --> return new token && userId
 ```
 
 #### /login
 ```javascript
-  .post() //Log in functionality(you need to provide correct email and corect password) --> return new token
+  .post() //Log in functionality(you need to provide correct email and corect password) --> return new token && userID
 ```
  #### /user/:userId
  ```javascript

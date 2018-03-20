@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost:5000')
+mongoose.connect('mongodb://heroku_26s0z10k:4h987q0q9jblr43qomgr4rq12f@ds119489.mlab.com:19489/heroku_26s0z10k')
 
 //ROUTES
 app.use(Auth)

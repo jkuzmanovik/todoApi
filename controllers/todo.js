@@ -25,6 +25,7 @@ module.exports = {
         if(!todo) return res.status(400).send('incorrect id')
         return res.status(200).json({todo})
     },
+    //BUG FOR REPLACING USERS, PASSWORD REPLACE IN PLAIN TEXT
     replaceTodo: async (req,res,next) => {
         const {todoId} = req.value.params
         const todoBody = req.value.body

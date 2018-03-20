@@ -26,7 +26,7 @@ module.exports = {
         const userBody = req.value.body
         const user = await User.findOneAndUpdate(userId,userBody,{new:true})
         if(!user) return res.status(400).send('No user with that specific id')
-        return res.json({success:true})
+        return res.json(user)
     },
     //working with patch where you need to provide only the field that you want to update
     updateUser: async (req,res,next) => {

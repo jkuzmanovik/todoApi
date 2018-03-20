@@ -17,6 +17,8 @@ router.route('/:todoId')
     .delete(todo.deleteTodo)
 
 router.route('/:todoId/finish')
+//here put and patch will do the same thing
+//but it depends how you want to make the request with patch or put id doesn't matter
     .put(validateBody(schemas.todoOptionalSchema),todo.updateFinished)
     .patch(validateBody(schemas.todoOptionalSchema),todo.updateFinished)
 

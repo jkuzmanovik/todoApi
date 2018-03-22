@@ -27,7 +27,7 @@ userSchema.pre('save',async function (next) {
         this.password = passwordHash
         next()
     }catch(err) {
-        next(err)
+        throw new Error(err)
     }
 })
 

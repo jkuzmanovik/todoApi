@@ -12,8 +12,7 @@ const passwordLogin = passport.authenticate('local',{session:false})
 
 //middleware
 router.use(authenticate)
-router.route('/')
-    .get(user.getAllUsers)
+
 
 //validate parameter for every request that come with userId
 router.use('/:userId',validateParam(schemas.idSchema,'userId'),auth.checkIfRealUser)

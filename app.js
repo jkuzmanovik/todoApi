@@ -7,6 +7,8 @@ const PORT = process.env.PORT || 5000
 const app = express()
 const User = require('./routes/user')
 const Auth = require('./routes/auth')
+const URL = process.env.MONGODB_URI
+
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 //MIDDLEWARE
 app.use(logger('dev'))
@@ -15,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 
 mongoose.Promise = global.Promise
+mongoose.connect(URI)
 
 
 //ROUTES

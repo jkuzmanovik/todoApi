@@ -7,6 +7,10 @@
 
 const User = require('../models/schema/user')
 module.exports = {
+    getAllUsers: async (req,res,next) => {
+        const users = await User.find({})
+        return res.json(users)
+    },
     //Get user with id that is checked by middleware if it is valid and stored in req.value.params.userId
     getUserById: async (req,res,next) => {
         const {userId} = req.value.params

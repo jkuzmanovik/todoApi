@@ -2,10 +2,13 @@
 ## About this project
   This is simple todo project that i created for fun 
 
-###HOST
+## HOST
   this api is hosted on heroku feel free to use it :)
 
   URL: https://jordantodoapi.herokuapp.com/
+ 
+## APP
+  Currently Under development --github link -> https://github.com/jkuzmanovik/todo-reactNative
 
 ## USAGE 
 ### userSchema ###

@@ -20,20 +20,24 @@ const userSchema = new Schema({
 })
 
 
-userSchema.pre('save',async function (next) {
+userSchema.methods.hashPassword = async function (next) {
     try{
         const salt = await bcrypt.genSalt(10)
         const passwordHash = await bcrypt.hash(this.password,salt)
-        this.password = passwordHash
-        next()
+            this.password = passwordHash
+        return
     }catch(err) {
         throw new Error(err)
     }
-})
+}
 
 userSchema.methods.comparePassword = async function(pw) {
     try{
-       return await bcrypt.compare(pw,this.password)
+        console.log('this is the password' + pw)
+        console.log('this is the user password' + this.password)
+        const isOkay = await bcrypt.compare(pw,this.password)
+        console.log('ova e od znaes kade' + isOkay)
+        return isOkay 
     }catch(err){
         throw new Error(err)
     }

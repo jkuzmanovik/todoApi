@@ -7,6 +7,7 @@ const User = require('../models/schema/user')
 const {jwtSecret} = require('../configuration/configuration')
 const {ExtractJwt}  =require('passport-jwt')
 
+
 //function for creating token
 signToken = user => {
     return jwt.sign({
@@ -24,6 +25,7 @@ module.exports = {
         const user = await User.findOne({email})
         if(!user) return res.status(400).send('No user with that email')
         const token =  await signToken(user)
+        console.log('stigam do tuka i ova e tokenot' + token)
         //return new token
         return res.status(200).json({token:token,userId:user.id})
 
@@ -36,6 +38,7 @@ module.exports = {
         if(await User.findOne({userName}))
             return res.status(400).send('userName already exists')
         const newUser = new User(req.value.body)
+        await newUser.hashPassword()
          await newUser.save()
         const token = signToken(newUser) 
         return res.status(200).json({token:token,userId:newUser.id})

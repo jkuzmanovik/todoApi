@@ -8,7 +8,6 @@ const app = express()
 const User = require('./routes/user')
 const Auth = require('./routes/auth')
 const URI = process.env.MONGODB_URI
-const userCont = require('./controllers/user')
 
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 //MIDDLEWARE
@@ -18,9 +17,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost:5000')
+mongoose.connect(URI)
 
-app.get('/fetch',userCont.getAllUsers)
+
 //ROUTES
 app.use(Auth)
 app.use('/user',User)
@@ -43,6 +42,6 @@ app.use(function(err, req, res, next) {
   res.render('error')
 });
 
-app.listen(3000, () => console.log(`Listening on ${ 3000 }`))
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 module.exports = app

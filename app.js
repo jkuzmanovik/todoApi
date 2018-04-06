@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 
 mongoose.Promise = global.Promise
-mongoose.connect(URI)
+mongoose.connect('mongodb://localhost:5000')
 
 app.get('/fetch',userCont.getAllUsers)
 //ROUTES
@@ -43,6 +43,6 @@ app.use(function(err, req, res, next) {
   res.render('error')
 });
 
-app.listen(PORT || 3000, () => console.log(`Listening on ${ PORT || 3000 }`))
+app.listen(3000, () => console.log(`Listening on ${ 3000 }`))
 
 module.exports = app

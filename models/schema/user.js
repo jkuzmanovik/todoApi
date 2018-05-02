@@ -33,10 +33,7 @@ userSchema.methods.hashPassword = async function (next) {
 
 userSchema.methods.comparePassword = async function(pw) {
     try{
-        console.log('this is the password' + pw)
-        console.log('this is the user password' + this.password)
         const isOkay = await bcrypt.compare(pw,this.password)
-        console.log('ova e od znaes kade' + isOkay)
         return isOkay 
     }catch(err){
         throw new Error(err)

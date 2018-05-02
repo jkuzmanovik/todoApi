@@ -25,7 +25,6 @@ module.exports = {
         const user = await User.findOne({email})
         if(!user) return res.status(400).send('No user with that email')
         const token =  await signToken(user)
-        console.log('stigam do tuka i ova e tokenot' + token)
         //return new token
         return res.status(200).json({token:token,userId:user.id})
 
